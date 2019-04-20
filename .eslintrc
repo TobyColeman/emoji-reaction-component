@@ -8,6 +8,7 @@
     "es6": true
   },
   "plugins": [
+    "emotion",
     "react"
   ],
   "parserOptions": {
@@ -18,6 +19,14 @@
     "space-before-function-paren": 0,
 
     // allow specifying true explicitly for boolean props
-    "react/jsx-boolean-value": 0
+    "react/jsx-boolean-value": 0,
+
+    // we use emotion's jsx function instead of React.createElement
+    "react/react-in-jsx-scope": "off",
+    
+    "emotion/jsx-import": "off",
+    "emotion/no-vanilla": "error",
+    "emotion/import-from-emotion": "error",
+    "emotion/styled-import": "error"
   }
 }
