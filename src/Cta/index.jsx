@@ -4,26 +4,30 @@ import { css } from '@emotion/core'
 import posed from 'react-pose'
 
 import Cross from '../icons/cross.svg'
+import AngryFace from '../icons/angry-face.svg'
+import LoveFace from '../icons/love-face.svg'
 
 import usePrevious from '../hooks/use-previous'
 
 const OPEN_CLOSE_ANIMATION_DURATION = 300 // 300ms
+// TODO: make these customisable by props
+const EMOJI_SIZE = 64
+const CONTAINER_SIZE = '192px'
 
 const Box = posed.div({
   open: {
-    width: '50px',
+    width: CONTAINER_SIZE,
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
   },
   closed: {
-    width: '16px',
+    width: '64px',
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
-
   }
 })
 
 const Box2 = posed.div({
   open: {
-    x: '34px',
+    x: '0px',
     y: '0px',
     rotate: '45deg',
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
@@ -36,15 +40,19 @@ const Box2 = posed.div({
   }
 })
 
-const styles = css`
+const ctaStyles = css`
   display: inline-flex;
   flex-direction: row;
   background-color: #f7f7f7;
-  border-radius: 8px;
+  width: ${EMOJI_SIZE}px;
+  height: ${EMOJI_SIZE}px;
+  border-radius: 96px;
 `
 
-const crossBaseCss = css`
+const iconBaseStyles = css`
   display: flex;
+  width: ${EMOJI_SIZE}px;
+  height: ${EMOJI_SIZE}px;
 `
 
 export default function Cta(props = { isOpen: false }) {
@@ -58,13 +66,15 @@ export default function Cta(props = { isOpen: false }) {
 
   return (
     <Box
-      css={styles}
+      css={ctaStyles}
       onClick={() => setOpen(!isOpen)}
       pose={isOpen ? 'open' : 'closed'}
     >
+      <LoveFace css={iconBaseStyles} />
+      <AngryFace css={iconBaseStyles} />
       <Box2 pose={isOpen ? 'open' : 'closed'}>
         <Cross
-          css={[crossBaseCss]}
+          css={iconBaseStyles}
         />
       </Box2>
     </Box>
