@@ -9,33 +9,50 @@ import LoveFace from '../icons/love-face.svg'
 
 import usePrevious from '../hooks/use-previous'
 
-const OPEN_CLOSE_ANIMATION_DURATION = 300 // 300ms
 // TODO: make these customisable by props
-const EMOJI_SIZE = 64
-const CONTAINER_SIZE = '192px'
+const OPEN_CLOSE_ANIMATION_DURATION = 200 // (ms)
+const CONTAINER_SIZE = 160 // size of Cta when expanded (px)
+const REACTION_SIZE = 64 // size of emoji in (px)
+const REACTION_SPACING = 8 // spacing around emoji in (px)
+const CROSS_SIZE = 32 // size of the add/close cross (px)
 
-const Box = posed.div({
+const Root = posed.div({
   open: {
-    width: CONTAINER_SIZE,
+    width: `${CONTAINER_SIZE}px`,
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
   },
   closed: {
-    width: '64px',
+    width: `${REACTION_SIZE}px`,
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
   }
 })
 
-const Box2 = posed.div({
+const CrossContainer = posed.div({
   open: {
-    x: '0px',
+    x: `${REACTION_SIZE + CROSS_SIZE + 8}px`, // container size - emoji size
     y: '0px',
     rotate: '45deg',
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
   },
   closed: {
-    x: '0px',
+    x: `${CROSS_SIZE / 2}px`, // half of cross size
     y: '0px',
     rotate: '-90deg',
+    transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
+  }
+})
+
+const EmojiGroup = posed.div({
+  open: {
+    y: '0px',
+    x: '0px',
+    opacity: 1,
+    transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
+  },
+  closed: {
+    y: `-${REACTION_SIZE / 2}px`, // half of emoji size
+    x: `-${(CONTAINER_SIZE - REACTION_SIZE) / 2}px`,
+    opacity: 0,
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
   }
 })
@@ -43,16 +60,36 @@ const Box2 = posed.div({
 const ctaStyles = css`
   display: inline-flex;
   flex-direction: row;
+  align-items: center;
   background-color: #f7f7f7;
-  width: ${EMOJI_SIZE}px;
-  height: ${EMOJI_SIZE}px;
+  width: ${REACTION_SIZE}px;
+  height: ${REACTION_SIZE}px;
   border-radius: 96px;
+`
+
+const emojiBaseStyles = css`
+  width: ${REACTION_SIZE - REACTION_SPACING}px;
+  height: ${REACTION_SIZE - REACTION_SPACING}px;
+  margin-left: 4px;
+`
+
+const crossIconStyles = css`
+  width: ${CROSS_SIZE}px;
+  height: ${CROSS_SIZE}px;
 `
 
 const iconBaseStyles = css`
   display: flex;
-  width: ${EMOJI_SIZE}px;
-  height: ${EMOJI_SIZE}px;
+`
+
+const emojiGroupStyles = css`
+  display: flex;
+  position: absolute;
+`
+
+const emojiOverlap = css`
+  margin-left: -21px;
+  z-index: -1;
 `
 
 export default function Cta(props = { isOpen: false }) {
@@ -65,19 +102,27 @@ export default function Cta(props = { isOpen: false }) {
   })
 
   return (
-    <Box
+    <Root
       css={ctaStyles}
       onClick={() => setOpen(!isOpen)}
       pose={isOpen ? 'open' : 'closed'}
     >
-      <LoveFace css={iconBaseStyles} />
-      <AngryFace css={iconBaseStyles} />
-      <Box2 pose={isOpen ? 'open' : 'closed'}>
+      <EmojiGroup
+        css={emojiGroupStyles}
+        pose={isOpen ? 'open' : 'closed'}
+      >
+        <LoveFace css={[iconBaseStyles, emojiBaseStyles]} />
+        <AngryFace css={[iconBaseStyles, emojiBaseStyles, emojiOverlap]} />
+      </EmojiGroup>
+      <CrossContainer
+        css={crossIconStyles}
+        pose={isOpen ? 'open' : 'closed'}
+      >
         <Cross
-          css={iconBaseStyles}
+          css={[iconBaseStyles, crossIconStyles]}
         />
-      </Box2>
-    </Box>
+      </CrossContainer>
+    </Root>
   )
 }
 
