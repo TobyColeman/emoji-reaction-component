@@ -15,7 +15,7 @@ module.exports = ({ config }) => {
     use: [{
       loader: '@svgr/webpack',
       options: {
-        icon: true,
+        icon: true
       },
     }],
   });
