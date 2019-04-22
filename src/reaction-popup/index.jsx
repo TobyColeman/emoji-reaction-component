@@ -10,13 +10,14 @@ const containerStyles = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16));
 `
 
 const reactionContainerStyles = css`
   display: flex;
   border-radius: 15px;
   padding: 10px;
-  background-color: #f7f7f7;
+  background-color: #fff;
 `
 
 const reactionStyles = css`
@@ -30,7 +31,7 @@ const caretStyles = css`
   margin-top: -10px;
   width: 32px;
   height: 32px;
-  fill: #f7f7f7;
+  fill: #fff;
   z-index: -1;
 `
 
