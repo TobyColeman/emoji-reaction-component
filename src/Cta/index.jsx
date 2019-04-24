@@ -58,13 +58,15 @@ const EmojiGroup = posed.div({
 })
 
 const ctaStyles = css`
+  position: relative;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  background-color: #f7f7f7;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
   width: ${REACTION_SIZE}px;
   height: ${REACTION_SIZE}px;
   border-radius: 96px;
+  z-index: 1;
 `
 
 const emojiBaseStyles = css`
@@ -128,6 +130,6 @@ export default function Cta(props = { isOpen: false }) {
 
 Cta.propTypes = {
   isOpen: PropTypes.bool,
-  onOpen: PropTypes.function,
-  onClose: PropTypes.function
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func
 }
