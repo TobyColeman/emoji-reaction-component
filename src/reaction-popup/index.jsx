@@ -7,24 +7,26 @@ import WowReaction from '../icons/wow-face.svg'
 import CaretDown from '../icons/caret-down.svg'
 
 const containerStyles = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16));
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12));
 `
 
 const reactionContainerStyles = css`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   border-radius: 15px;
   padding: 10px;
   background-color: #fff;
 `
 
 const reactionStyles = css`
-  padding-left: 4px;
-  padding-right: 4px;
-  width: 64px;
-  height: 64px;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 56px;
+  height: 56px;
 `
 
 const caretStyles = css`
