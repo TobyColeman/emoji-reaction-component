@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { actions } from '@storybook/addon-actions'
 import centered from '@storybook/addon-centered/react'
 
-import Cta from '../src/cta'
+import Cta from './'
 
 const ctaActions = actions('onOpen', 'onClose')
 

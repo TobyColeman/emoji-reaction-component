@@ -3,8 +3,8 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import centered from '@storybook/addon-centered/react'
 
-import ReactionPopup from '../src/reaction-popup'
+import EmojiReaction from './'
 
-storiesOf('ReactionPopup', module)
+storiesOf('EmojiReaction', module)
   .addDecorator(centered)
-  .add('default', () => <ReactionPopup />)
+  .add('default', () => <EmojiReaction />)
