@@ -5,6 +5,6 @@ import centered from '@storybook/addon-centered/react'
 
 import ReactionPopup from './'
 
-storiesOf('ReactionPopup', module)
+storiesOf('EmojiReaction/ReactionPopup', module)
   .addDecorator(centered)
   .add('default', () => <ReactionPopup />)

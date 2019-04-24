@@ -8,7 +8,7 @@ import Cta from './'
 
 const ctaActions = actions('onOpen', 'onClose')
 
-storiesOf('Cta', module)
+storiesOf('EmojiReaction/Cta', module)
   .addDecorator(centered)
   .add('When open', () => <Cta {...ctaActions} isOpen={true} />)
   .add('When closed', () => <Cta {...ctaActions} isOpen={false} />)
