@@ -117,7 +117,6 @@ export default function Cta(props = { isOpen: false }) {
         <AngryFace css={[iconBaseStyles, emojiBaseStyles, emojiOverlap]} />
       </EmojiGroup>
       <CrossContainer
-        css={crossIconStyles}
         pose={isOpen ? 'open' : 'closed'}
       >
         <Cross
