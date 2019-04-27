@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 
-import Cta from './cta'
-import ReactionPopup from './reaction-popup'
+import Cta from './components/cta'
+import ReactionPopup from './components/reaction-popup'
 
 const OPEN_CLOSE_ANIMATION_DURATION = 150 // (ms)
 
@@ -23,7 +23,7 @@ const reactionPopupStyles = css`
   z-index: 2;
 `
 
-const TmpWrapper = posed.div({
+const PosedReactionPopup = posed(ReactionPopup)({
   open: {
     opacity: 1,
     y: '-100%',
@@ -41,12 +41,10 @@ export default function EmojiReaction () {
 
   return (
     <div css={containerStyles}>
-      <TmpWrapper
+      <PosedReactionPopup
         css={[reactionPopupStyles, !isPopupOpen && reactionPopupHiddenStyles]}
         pose={isPopupOpen ? 'open' : 'closed'}
-      >
-        <ReactionPopup />
-      </TmpWrapper>
+      />
       <Cta
         onOpen={() => setPopupOpen(true)}
         onClose={() => setPopupOpen(false)}

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { css } from '@emotion/core'
 
 import TitledReaction from '../titled-reaction'
@@ -31,9 +32,9 @@ const caretStyles = css`
   z-index: -1;
 `
 
-export default function ReactionPopup () {
+function ReactionPopup (props, ref) {
   return (
-    <div css={containerStyles}>
+    <div {...props} ref={ref} css={containerStyles}>
       <div css={reactionContainerStyles}>
         <TitledReaction
           title='Wow'
@@ -52,3 +53,5 @@ export default function ReactionPopup () {
     </div>
   )
 }
+
+export default forwardRef(ReactionPopup)
