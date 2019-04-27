@@ -4,8 +4,8 @@ import { css } from '@emotion/core'
 import posed from 'react-pose'
 
 import Cross from '../icons/cross.svg'
-import AngryFace from '../icons/angry-face.svg'
-import LoveFace from '../icons/love-face.svg'
+import AngryFace from '../icons/reactions/angry.svg'
+import LoveFace from '../icons/reactions/love.svg'
 
 import usePrevious from '../hooks/use-previous'
 

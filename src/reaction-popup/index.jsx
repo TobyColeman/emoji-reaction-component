@@ -2,9 +2,9 @@ import { css } from '@emotion/core'
 
 import TitledReaction from '../titled-reaction'
 
-import LoveReaction from '../icons/love-face.svg'
-import CryReaction from '../icons/cry-face.svg'
-import WowReaction from '../icons/wow-face.svg'
+import LoveReaction from '../icons/reactions/love.svg'
+import CryReaction from '../icons/reactions/cry.svg'
+import WowReaction from '../icons/reactions/wow.svg'
 import CaretDown from '../icons/caret-down.svg'
 
 const containerStyles = css`
