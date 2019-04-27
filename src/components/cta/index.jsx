@@ -27,7 +27,7 @@ const Root = posed.div({
   }
 })
 
-const CrossContainer = posed.div({
+const PosedCross = posed.div({
   open: {
     x: `${REACTION_SIZE + CROSS_SIZE + 8}px`, // container size - emoji size
     y: '0px',
@@ -116,13 +116,13 @@ export default function Cta(props = { isOpen: false }) {
         <LoveFace css={[iconBaseStyles, emojiBaseStyles]} />
         <AngryFace css={[iconBaseStyles, emojiBaseStyles, emojiOverlap]} />
       </EmojiGroup>
-      <CrossContainer
+      <PosedCross
         pose={isOpen ? 'open' : 'closed'}
       >
         <Cross
           css={[iconBaseStyles, crossIconStyles]}
         />
-      </CrossContainer>
+      </PosedCross>
     </Root>
   )
 }
