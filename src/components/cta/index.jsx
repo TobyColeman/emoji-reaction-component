@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 
-import Cross from '../icons/cross.svg'
-import AngryFace from '../icons/reactions/angry.svg'
-import LoveFace from '../icons/reactions/love.svg'
+import Cross from '../../icons/cross.svg'
+import AngryFace from '../../icons/reactions/angry.svg'
+import LoveFace from '../../icons/reactions/love.svg'
 
-import usePrevious from '../hooks/use-previous'
+import usePrevious from '../../hooks/use-previous'
 
 // TODO: make these customisable by props
 const OPEN_CLOSE_ANIMATION_DURATION = 200 // (ms)
