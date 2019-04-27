@@ -118,6 +118,7 @@ export default function Cta(props = { isOpen: false }) {
       </EmojiGroup>
       <PosedCross
         pose={isOpen ? 'open' : 'closed'}
+        css={crossIconStyles}
       >
         <Cross
           css={[iconBaseStyles, crossIconStyles]}
