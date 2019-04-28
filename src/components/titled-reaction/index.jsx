@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import posed from 'react-pose'
 
 const root = css`
   display: flex;
@@ -24,10 +25,16 @@ const reactionStyles = css`
   height: 56px;
 `
 
+const PosedIcon = posed.div({
+  hoverable: true,
+  init: { scale: 1 },
+  hover: { scale: 1.2 }
+})
+
 export default function TitledReaction ({ icon: Icon, title, className }) {
   return (
     <div css={root} className={className}>
-      <Icon css={reactionStyles} />
+      <PosedIcon><Icon css={reactionStyles} /></PosedIcon>
       <p
         css={reactionTxt}
       >{title}
