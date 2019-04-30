@@ -7,6 +7,9 @@ const root = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const reactionTxt = css`
@@ -25,16 +28,18 @@ const reactionStyles = css`
   height: 56px;
 `
 
-const PosedIcon = posed.div({
+const PosedReaction = posed.div({
   hoverable: true,
   init: { scale: 1 },
   hover: { scale: 1.2 }
 })
 
-export default function TitledReaction ({ icon: Icon, title, className }) {
+export default function TitledReaction ({ reaction: Reaction, title, className }) {
   return (
     <div css={root} className={className}>
-      <PosedIcon><Icon css={reactionStyles} /></PosedIcon>
+      <PosedReaction>
+        <Reaction css={reactionStyles} />
+      </PosedReaction>
       <p
         css={reactionTxt}
       >{title}
@@ -45,6 +50,6 @@ export default function TitledReaction ({ icon: Icon, title, className }) {
 
 TitledReaction.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.func.isRequired,
+  reaction: PropTypes.func.isRequired,
   className: PropTypes.string
 }

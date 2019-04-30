@@ -8,4 +8,4 @@ import LoveReaction from '../../icons/reactions/love.svg'
 
 storiesOf('EmojiReaction/TitledReaction', module)
   .addDecorator(centered)
-  .add('default', () => <TitledReaction title={'Love it'} icon={LoveReaction} />)
+  .add('default', () => <TitledReaction title={'Love it'} reaction={LoveReaction} />)

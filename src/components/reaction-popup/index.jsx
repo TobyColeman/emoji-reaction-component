@@ -1,11 +1,7 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import TitledReaction from '../titled-reaction'
-
-import LoveReaction from '../../icons/reactions/love.svg'
-import CryReaction from '../../icons/reactions/cry.svg'
-import WowReaction from '../../icons/reactions/wow.svg'
 import CaretDown from '../../icons/caret-down.svg'
 
 const containerStyles = css`
@@ -32,26 +28,33 @@ const caretStyles = css`
   z-index: -1;
 `
 
-function ReactionPopup (props, ref) {
+function ReactionPopup (props) {
   return (
-    <div {...props} ref={ref} css={containerStyles}>
+    <div
+      ref={props.forwardedRef}
+      css={containerStyles}
+      className={props.className}
+    >
       <div css={reactionContainerStyles}>
-        <TitledReaction
-          title='Wow'
-          icon={WowReaction}
-        />
-        <TitledReaction
-          title='Love it'
-          icon={LoveReaction}
-        />
-        <TitledReaction
-          title='oof'
-          icon={CryReaction}
-        />
+        {props.reactions.map((reaction, idx) => (
+          <React.Fragment key={idx}>
+            {reaction}
+          </React.Fragment>
+        ))}
       </div>
       <CaretDown css={caretStyles} />
     </div>
   )
 }
 
-export default forwardRef(ReactionPopup)
+ReactionPopup.propTypes = {
+  reactions: PropTypes.arrayOf(PropTypes.element).isRequired,
+  forwardedRef: PropTypes.any,
+  className: PropTypes.string
+}
+
+export default forwardRef(
+  function reactionPopup (props, ref) {
+    return <ReactionPopup {...props} forwardedRef={ref} />
+  }
+)

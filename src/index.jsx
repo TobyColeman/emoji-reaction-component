@@ -36,7 +36,7 @@ const PosedReactionPopup = posed(ReactionPopup)({
   }
 })
 
-export default function EmojiReaction () {
+export default function EmojiReaction (props) {
   const [isPopupOpen, setPopupOpen] = useState(false)
 
   return (
@@ -44,6 +44,7 @@ export default function EmojiReaction () {
       <PosedReactionPopup
         css={[reactionPopupStyles, !isPopupOpen && reactionPopupHiddenStyles]}
         pose={isPopupOpen ? 'open' : 'closed'}
+        reactions={props.reactions}
       />
       <Cta
         onOpen={() => setPopupOpen(true)}
@@ -52,3 +53,16 @@ export default function EmojiReaction () {
     </div>
   )
 }
+
+export { default as TitledReaction } from './components/titled-reaction'
+export { default as AngryReaction } from './icons/reactions/angry.svg'
+export { default as CryReaction } from './icons/reactions/cry.svg'
+export { default as DeadReaction } from './icons/reactions/dead.svg'
+export { default as EmbarrassReaction } from './icons/reactions/embarrass.svg'
+export { default as HappyReaction } from './icons/reactions/happy.svg'
+export { default as JoyReaction } from './icons/reactions/joy.svg'
+export { default as LoveReaction } from './icons/reactions/love.svg'
+export { default as ShyReaction } from './icons/reactions/shy.svg'
+export { default as SleepyReaction } from './icons/reactions/sleepy.svg'
+export { default as WinkReaction } from './icons/reactions/wink.svg'
+export { default as WowReaction } from './icons/reactions/wow.svg'
