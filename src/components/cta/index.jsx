@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
@@ -6,8 +5,6 @@ import posed from 'react-pose'
 import Cross from '../../icons/cross.svg'
 import AngryFace from '../../icons/reactions/angry.svg'
 import LoveFace from '../../icons/reactions/love.svg'
-
-import usePrevious from '../../hooks/use-previous'
 
 // TODO: make these customisable by props
 const OPEN_CLOSE_ANIMATION_DURATION = 200 // (ms)
@@ -94,19 +91,11 @@ const emojiOverlap = css`
   z-index: -1;
 `
 
-export default function Cta(props = { isOpen: false }) {
-  const [isOpen, setOpen] = useState(props.isOpen)
-  const prevIsOpen = usePrevious(isOpen)
-
-  useEffect(() => {
-    let cb = isOpen ? props.onOpen : props.onClose
-    if (prevIsOpen !== isOpen && cb) cb()
-  })
-
+export default function Cta({ isOpen, onOpen, onClose }) {
   return (
     <Root
       css={ctaStyles}
-      onClick={() => setOpen(!isOpen)}
+      onClick={() => { isOpen ? onClose() : onOpen() }}
       pose={isOpen ? 'open' : 'closed'}
     >
       <EmojiGroup
@@ -130,6 +119,6 @@ export default function Cta(props = { isOpen: false }) {
 
 Cta.propTypes = {
   isOpen: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func
+  onOpen: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
 }

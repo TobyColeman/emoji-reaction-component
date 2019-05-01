@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 
+import { ReactionConsumer } from '../../providers/reaction-context'
+
 const root = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  &:hover {
-    cursor: pointer;
-  }
 `
 
 const reactionTxt = css`
@@ -26,6 +25,9 @@ const reactionStyles = css`
   padding-right: 8px;
   width: 56px;
   height: 56px;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const PosedReaction = posed.div({
@@ -37,9 +39,13 @@ const PosedReaction = posed.div({
 export default function TitledReaction ({ reaction: Reaction, title, className }) {
   return (
     <div css={root} className={className}>
-      <PosedReaction>
-        <Reaction css={reactionStyles} />
-      </PosedReaction>
+      <ReactionConsumer>
+        {(onReact) => (
+          <PosedReaction onClick={() => onReact(title)}>
+            <Reaction css={reactionStyles} />
+          </PosedReaction>
+        )}
+      </ReactionConsumer>
       <p
         css={reactionTxt}
       >{title}

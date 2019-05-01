@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 import centered from '@storybook/addon-centered/react'
 
 import EmojiReaction, {
@@ -12,13 +13,12 @@ import EmojiReaction, {
 
 storiesOf('EmojiReaction', module)
   .addDecorator(centered)
-  .add('default', () => <EmojiReaction reactions={[
-    <AngryReaction />,
-    <HappyReaction />,
-    <CryReaction />
-  ]} />)
-  .add('with title', () => <EmojiReaction reactions={[
-    <TitledReaction title={'Grr'} reaction={AngryReaction} />,
-    <TitledReaction title={'Awesome'} reaction={HappyReaction} />,
-    <TitledReaction title={'oof'} reaction={CryReaction} />
-  ]} />)
+  .add('default', () =>
+    <EmojiReaction
+      onReact={action('clicked')}
+      reactions={[
+        <TitledReaction title={'Grr'} reaction={AngryReaction} />,
+        <TitledReaction title={'Awesome'} reaction={HappyReaction} />,
+        <TitledReaction title={'oof'} reaction={CryReaction} />
+      ]} />
+  )

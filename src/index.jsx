@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 
 import Cta from './components/cta'
 import ReactionPopup from './components/reaction-popup'
+import { ReactionProvider } from './providers/reaction-context'
 
 const OPEN_CLOSE_ANIMATION_DURATION = 150 // (ms)
 
@@ -36,22 +38,41 @@ const PosedReactionPopup = posed(ReactionPopup)({
   }
 })
 
-export default function EmojiReaction (props) {
-  const [isPopupOpen, setPopupOpen] = useState(false)
+export default function EmojiReaction ({ onReact, ...rest }) {
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [reaction, setReaction] = useState()
+
+  const reactionHandler = reactionType => {
+    setReaction(reactionType)
+    setIsPopupOpen(false)
+  }
+
+  useEffect(() => {
+    if (reaction) {
+      onReact(reaction)
+    }
+  })
 
   return (
     <div css={containerStyles}>
-      <PosedReactionPopup
-        css={[reactionPopupStyles, !isPopupOpen && reactionPopupHiddenStyles]}
-        pose={isPopupOpen ? 'open' : 'closed'}
-        reactions={props.reactions}
-      />
-      <Cta
-        onOpen={() => setPopupOpen(true)}
-        onClose={() => setPopupOpen(false)}
-      />
+      <ReactionProvider value={reactionHandler}>
+        <PosedReactionPopup
+          css={[reactionPopupStyles, !isPopupOpen && reactionPopupHiddenStyles]}
+          pose={isPopupOpen ? 'open' : 'closed'}
+          {...rest}
+        />
+        <Cta
+          isOpen={!isPopupOpen}
+          onOpen={() => setIsPopupOpen(false)}
+          onClose={() => setIsPopupOpen(true)}
+        />
+      </ReactionProvider>
     </div>
   )
+}
+
+EmojiReaction.propTypes = {
+  onReact: PropTypes.func.isRequired
 }
 
 export { default as TitledReaction } from './components/titled-reaction'
