@@ -9,7 +9,7 @@ const containerStyles = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12));
+  filter: drop-shadow(0px 1px 3px rgba(0,0,0,0.12));
 `
 
 const reactionContainerStyles = css`

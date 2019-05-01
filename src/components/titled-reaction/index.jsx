@@ -32,8 +32,19 @@ const reactionStyles = css`
 
 const PosedReaction = posed.div({
   hoverable: true,
-  init: { scale: 1 },
-  hover: { scale: 1.2 }
+  pressable: true,
+  init: {
+    scale: 1,
+    filter: 'drop-shadow(0px 0px 0px rgba(0,0,0,0))'
+  },
+  hover: {
+    scale: 1.2,
+    filter: 'drop-shadow(0px 1px 3px rgba(0,0,0,0.18))'
+  },
+  press: {
+    scale: 1.1,
+    filter: 'drop-shadow(0px 1px 3px rgba(0,0,0,0.12))'
+  }
 })
 
 export default function TitledReaction ({ reaction: Reaction, title, className }) {
