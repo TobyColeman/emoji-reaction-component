@@ -6,7 +6,9 @@ import Cross from '../../icons/cross.svg'
 import AngryFace from '../../icons/reactions/angry.svg'
 import LoveFace from '../../icons/reactions/love.svg'
 
-// TODO: make these customisable by props
+// TODO: ^ Toby C - 04.05.19  make these customisable by props
+// TODO: ^ Toby C - 04.05.19 - width/height should be provided
+// via emotion theme
 const OPEN_CLOSE_ANIMATION_DURATION = 200 // (ms)
 const CONTAINER_SIZE = 160 // size of Cta when expanded (px)
 const REACTION_SIZE = 64 // size of emoji in (px)
@@ -26,16 +28,21 @@ const Root = posed.div({
 
 const PosedCross = posed.div({
   open: {
+    scale: 1,
     x: `${REACTION_SIZE + CROSS_SIZE + 8}px`, // container size - emoji size
     y: '0px',
     rotate: '45deg',
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
   },
   closed: {
+    scale: 1,
     x: `${CROSS_SIZE / 2}px`, // half of cross size
     y: '0px',
     rotate: '-90deg',
     transition: { duration: OPEN_CLOSE_ANIMATION_DURATION }
+  },
+  hidden: {
+    scale: 0
   }
 })
 
@@ -91,7 +98,17 @@ const emojiOverlap = css`
   z-index: -1;
 `
 
-export default function Cta({ isOpen, onOpen, onClose }) {
+export default function Cta({
+  isOpen,
+  isCtaIconVisible = true,
+  onOpen,
+  onClose,
+  children
+}) {
+  const ctaAnimationState = !isCtaIconVisible
+    ? 'hidden'
+    : isOpen ? 'open' : 'closed'
+
   return (
     <Root
       css={ctaStyles}
@@ -106,13 +123,14 @@ export default function Cta({ isOpen, onOpen, onClose }) {
         <AngryFace css={[iconBaseStyles, emojiBaseStyles, emojiOverlap]} />
       </EmojiGroup>
       <PosedCross
-        pose={isOpen ? 'open' : 'closed'}
+        pose={ctaAnimationState}
         css={crossIconStyles}
       >
         <Cross
           css={[iconBaseStyles, crossIconStyles]}
         />
       </PosedCross>
+      {children}
     </Root>
   )
 }
@@ -120,5 +138,7 @@ export default function Cta({ isOpen, onOpen, onClose }) {
 Cta.propTypes = {
   isOpen: PropTypes.bool,
   onOpen: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  isCtaIconVisible: PropTypes.bool,
+  children: PropTypes.element
 }
