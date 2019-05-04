@@ -7,7 +7,7 @@ import Loading from '../../icons/loading.svg'
 import Check from '../../icons/check.svg'
 import Error from '../../icons/cross.svg'
 
-// TODO ^ Toby C - 04.05.19 - width/height should be provided
+// TODO: ^ Toby C - 04.05.19 - width/height should be provided
 // via emotion theme
 const iconStyles = css`
   width: 62px;
