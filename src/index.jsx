@@ -7,6 +7,7 @@ import Cta from './components/cta'
 import ReactionPopup from './components/reaction-popup'
 import { ReactionProvider } from './providers/reaction-context'
 
+// TODO: ^ Toby C - 05.05.19  make this customisable by props
 const OPEN_CLOSE_ANIMATION_DURATION = 150 // (ms)
 
 const containerStyles = css`
@@ -38,9 +39,18 @@ const PosedReactionPopup = posed(ReactionPopup)({
   }
 })
 
-export default function EmojiReaction ({ onReact, ...rest }) {
+export default function EmojiReaction ({
+  onReact,
+  progress,
+  progressIndicator: ProgressIndicator,
+  ...rest
+}) {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [reaction, setReaction] = useState()
+  const isCtaIconVisible = !ProgressIndicator || progress === 'pending'
+  // If there is a progress indicator then close keep the cta closed
+  // whilst progress is animating
+  const isCtaOpen = !isPopupOpen && (ProgressIndicator ? !reaction : !ProgressIndicator)
 
   const reactionHandler = reactionType => {
     setReaction(reactionType)
@@ -62,17 +72,22 @@ export default function EmojiReaction ({ onReact, ...rest }) {
           {...rest}
         />
         <Cta
-          isOpen={!isPopupOpen}
+          isCtaIconVisible={isCtaIconVisible}
+          isOpen={isCtaOpen}
           onOpen={() => setIsPopupOpen(false)}
           onClose={() => setIsPopupOpen(true)}
-        />
+        >
+          {ProgressIndicator && <ProgressIndicator status={progress} />}
+        </Cta>
       </ReactionProvider>
     </div>
   )
 }
 
 EmojiReaction.propTypes = {
-  onReact: PropTypes.func.isRequired
+  onReact: PropTypes.func.isRequired,
+  progress: PropTypes.oneOf(['pending', 'loading', 'success', 'err']),
+  progressIndicator: PropTypes.func
 }
 
 export { default as TitledReaction } from './components/titled-reaction'
@@ -87,3 +102,4 @@ export { default as ShyReaction } from './icons/reactions/shy.svg'
 export { default as SleepyReaction } from './icons/reactions/sleepy.svg'
 export { default as WinkReaction } from './icons/reactions/wink.svg'
 export { default as WowReaction } from './icons/reactions/wow.svg'
+export { default as ProgressIndicator } from './components/progress'
