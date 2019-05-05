@@ -2,29 +2,72 @@
 
 > Emoji reaction component for React
 
-[![NPM](https://img.shields.io/npm/v/emoji-reaction.svg)](https://www.npmjs.com/package/emoji-reaction) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
 ## Install
 
 ```bash
 npm install --save emoji-reaction
+yarn add emoji-reaction
 ```
 
-## Usage
+## Basic Usage
 
-```jsx
+```js
 import React, { Component } from 'react'
 
-import MyComponent from 'emoji-reaction'
+import EmojiReaction, {
+  TitledReaction,
+  AngryReaction,
+  CryReaction
+} from 'emoji-reaction'
 
-class Example extends Component {
+class App extends Component {
+  constructor () {
+    this.state = { feedback: 'loading' }
+  }
+
+  takeWithAPinchOfSalt (reaction) {
+    console.log(`Oof! ${reaction}`)
+  }
+
   render () {
     return (
-      <MyComponent />
+      <EmojiReaction
+        onReact={this.takeWithAPinchOfSalt}
+        reactions={[
+          <TitledReaction title={'Grr'} reaction={AngryReaction} />,
+          <TitledReaction title={'Grr'} reaction={HappyReaction} />
+        ]}
+        {/* optional progress indicator
+          valid states - pending/loading/success/err*/}
+        progress={this.state.feedback}
+        progressIndicator={ProgressIndicator}
+      />
     )
   }
 }
 ```
+
+## Demo
+
+#### Standard
+![](https://media.giphy.com/media/TduejZZ1aXtcNXe8XJ/giphy.gif)
+
+#### With loading states
+![](https://media.giphy.com/media/YPgbDNaeMLT6mYa07u/giphy.gif)
+
+
+## TODO
+- [ ] Publish to NPM
+- [ ] Implement and document component themeing
+- [ ] resetting the state of the component after submission
+- [ ] textual feedback option
+- [ ] Prettierify + lint config updates
+- [ ] Update the example + fix example build
+
+## Acknowledgments
+
+- Design inspired from https://uimovement.com/ui/3365/reacting-to-content/
+- Reactions from https://www.iconfinder.com/iconsets/reaction
 
 ## License
 
