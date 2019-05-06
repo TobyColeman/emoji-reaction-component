@@ -57,7 +57,6 @@ class App extends Component {
 
 
 ## TODO
-- [ ] Publish to NPM
 - [ ] Implement and document component themeing
 - [ ] resetting the state of the component after submission
 - [ ] textual feedback option
