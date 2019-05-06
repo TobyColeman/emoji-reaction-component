@@ -1,6 +1,6 @@
 {
   "name": "emoji-reaction-component",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "Emoji reaction component for React",
   "author": "TobyColeman",
   "license": "MIT",
